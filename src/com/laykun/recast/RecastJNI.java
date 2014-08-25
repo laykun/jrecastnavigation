@@ -9,6 +9,18 @@
 package com.laykun.recast;
 
 public class RecastJNI {
+  public final static native long new_float_array(int jarg1);
+  public final static native void delete_float_array(long jarg1);
+  public final static native float float_array_getitem(long jarg1, int jarg2);
+  public final static native void float_array_setitem(long jarg1, int jarg2, float jarg3);
+  public final static native long new_double_array(int jarg1);
+  public final static native void delete_double_array(long jarg1);
+  public final static native double double_array_getitem(long jarg1, int jarg2);
+  public final static native void double_array_setitem(long jarg1, int jarg2, double jarg3);
+  public final static native long new_int_array(int jarg1);
+  public final static native void delete_int_array(long jarg1);
+  public final static native int int_array_getitem(long jarg1, int jarg2);
+  public final static native void int_array_setitem(long jarg1, int jarg2, int jarg3);
   public final static native int RC_CONTOUR_REG_MASK_get();
   public final static native int RC_MESH_NULL_IDX_get();
   public final static native short RC_NULL_AREA_get();

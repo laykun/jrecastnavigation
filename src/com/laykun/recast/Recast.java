@@ -9,6 +9,57 @@
 package com.laykun.recast;
 
 public class Recast {
+  public static SWIGTYPE_p_float new_float_array(int nelements) {
+    long cPtr = RecastJNI.new_float_array(nelements);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_float(cPtr, false);
+  }
+
+  public static void delete_float_array(SWIGTYPE_p_float ary) {
+    RecastJNI.delete_float_array(SWIGTYPE_p_float.getCPtr(ary));
+  }
+
+  public static float float_array_getitem(SWIGTYPE_p_float ary, int index) {
+    return RecastJNI.float_array_getitem(SWIGTYPE_p_float.getCPtr(ary), index);
+  }
+
+  public static void float_array_setitem(SWIGTYPE_p_float ary, int index, float value) {
+    RecastJNI.float_array_setitem(SWIGTYPE_p_float.getCPtr(ary), index, value);
+  }
+
+  public static SWIGTYPE_p_double new_double_array(int nelements) {
+    long cPtr = RecastJNI.new_double_array(nelements);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_double(cPtr, false);
+  }
+
+  public static void delete_double_array(SWIGTYPE_p_double ary) {
+    RecastJNI.delete_double_array(SWIGTYPE_p_double.getCPtr(ary));
+  }
+
+  public static double double_array_getitem(SWIGTYPE_p_double ary, int index) {
+    return RecastJNI.double_array_getitem(SWIGTYPE_p_double.getCPtr(ary), index);
+  }
+
+  public static void double_array_setitem(SWIGTYPE_p_double ary, int index, double value) {
+    RecastJNI.double_array_setitem(SWIGTYPE_p_double.getCPtr(ary), index, value);
+  }
+
+  public static SWIGTYPE_p_int new_int_array(int nelements) {
+    long cPtr = RecastJNI.new_int_array(nelements);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_int(cPtr, false);
+  }
+
+  public static void delete_int_array(SWIGTYPE_p_int ary) {
+    RecastJNI.delete_int_array(SWIGTYPE_p_int.getCPtr(ary));
+  }
+
+  public static int int_array_getitem(SWIGTYPE_p_int ary, int index) {
+    return RecastJNI.int_array_getitem(SWIGTYPE_p_int.getCPtr(ary), index);
+  }
+
+  public static void int_array_setitem(SWIGTYPE_p_int ary, int index, int value) {
+    RecastJNI.int_array_setitem(SWIGTYPE_p_int.getCPtr(ary), index, value);
+  }
+
   public static int getRC_CONTOUR_REG_MASK() {
     return RecastJNI.RC_CONTOUR_REG_MASK_get();
   }

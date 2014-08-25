@@ -5,6 +5,11 @@
 #include "RecastAssert.h"
 %}
 
+%include carrays.i
+%array_functions( float, float_array )
+%array_functions( double, double_array )
+%array_functions( int, int_array )
+
 //CONSTS
 /// Applied to the region id field of contour vertices in order to extract the region id.
 /// The region id field of a vertex may have several flags applied to it.  So the

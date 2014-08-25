@@ -4,7 +4,7 @@ c++ -shared -fPIC -IInclude/ -I/usr/lib/jvm/java-7-openjdk-amd64/include/ -I/usr
 mv *.java ../../src/com/laykun/recast/
 mv recast.so ../../librecast.so
 cd ../../
-jar cf jrecastnatives.jar recast.so
+#jar cf jrecastnatives.jar recast.so
 cd src
 find -name "*.java" > sources.txt
 javac @sources.txt

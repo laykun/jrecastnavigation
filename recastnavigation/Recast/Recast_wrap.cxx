@@ -216,9 +216,219 @@ static void SWIGUNUSED SWIG_JavaThrowException(JNIEnv *jenv, SWIG_JavaExceptionC
 #include "RecastAssert.h"
 
 
+static float *new_float_array(int nelements) { 
+  return new float[nelements]; 
+}
+
+static void delete_float_array(float *ary) { 
+  delete [] ary; 
+}
+
+static float float_array_getitem(float *ary, int index) {
+    return ary[index];
+}
+static void float_array_setitem(float *ary, int index, float value) {
+    ary[index] = value;
+}
+
+
+static double *new_double_array(int nelements) { 
+  return new double[nelements]; 
+}
+
+static void delete_double_array(double *ary) { 
+  delete [] ary; 
+}
+
+static double double_array_getitem(double *ary, int index) {
+    return ary[index];
+}
+static void double_array_setitem(double *ary, int index, double value) {
+    ary[index] = value;
+}
+
+
+static int *new_int_array(int nelements) { 
+  return new int[nelements]; 
+}
+
+static void delete_int_array(int *ary) { 
+  delete [] ary; 
+}
+
+static int int_array_getitem(int *ary, int index) {
+    return ary[index];
+}
+static void int_array_setitem(int *ary, int index, int value) {
+    ary[index] = value;
+}
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_new_1float_1array(JNIEnv *jenv, jclass jcls, jint jarg1) {
+  jlong jresult = 0 ;
+  int arg1 ;
+  float *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (int)jarg1; 
+  result = (float *)new_float_array(arg1);
+  *(float **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_delete_1float_1array(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  float *arg1 = (float *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(float **)&jarg1; 
+  delete_float_array(arg1);
+}
+
+
+SWIGEXPORT jfloat JNICALL Java_com_laykun_recast_RecastJNI_float_1array_1getitem(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2) {
+  jfloat jresult = 0 ;
+  float *arg1 = (float *) 0 ;
+  int arg2 ;
+  float result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(float **)&jarg1; 
+  arg2 = (int)jarg2; 
+  result = (float)float_array_getitem(arg1,arg2);
+  jresult = (jfloat)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_float_1array_1setitem(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2, jfloat jarg3) {
+  float *arg1 = (float *) 0 ;
+  int arg2 ;
+  float arg3 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(float **)&jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (float)jarg3; 
+  float_array_setitem(arg1,arg2,arg3);
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_new_1double_1array(JNIEnv *jenv, jclass jcls, jint jarg1) {
+  jlong jresult = 0 ;
+  int arg1 ;
+  double *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (int)jarg1; 
+  result = (double *)new_double_array(arg1);
+  *(double **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_delete_1double_1array(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  double *arg1 = (double *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(double **)&jarg1; 
+  delete_double_array(arg1);
+}
+
+
+SWIGEXPORT jdouble JNICALL Java_com_laykun_recast_RecastJNI_double_1array_1getitem(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2) {
+  jdouble jresult = 0 ;
+  double *arg1 = (double *) 0 ;
+  int arg2 ;
+  double result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(double **)&jarg1; 
+  arg2 = (int)jarg2; 
+  result = (double)double_array_getitem(arg1,arg2);
+  jresult = (jdouble)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_double_1array_1setitem(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2, jdouble jarg3) {
+  double *arg1 = (double *) 0 ;
+  int arg2 ;
+  double arg3 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(double **)&jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (double)jarg3; 
+  double_array_setitem(arg1,arg2,arg3);
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_new_1int_1array(JNIEnv *jenv, jclass jcls, jint jarg1) {
+  jlong jresult = 0 ;
+  int arg1 ;
+  int *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (int)jarg1; 
+  result = (int *)new_int_array(arg1);
+  *(int **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_delete_1int_1array(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  int *arg1 = (int *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(int **)&jarg1; 
+  delete_int_array(arg1);
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_int_1array_1getitem(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2) {
+  jint jresult = 0 ;
+  int *arg1 = (int *) 0 ;
+  int arg2 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(int **)&jarg1; 
+  arg2 = (int)jarg2; 
+  result = (int)int_array_getitem(arg1,arg2);
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_int_1array_1setitem(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2, jint jarg3) {
+  int *arg1 = (int *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(int **)&jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (int)jarg3; 
+  int_array_setitem(arg1,arg2,arg3);
+}
+
 
 SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_RC_1CONTOUR_1REG_1MASK_1get(JNIEnv *jenv, jclass jcls) {
   jint jresult = 0 ;

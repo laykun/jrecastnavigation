@@ -7,6 +7,7 @@
 ./com/laykun/recast/SWIGTYPE_p_int.java
 ./com/laykun/recast/rcCompactSpan.java
 ./com/laykun/recast/Recast.java
+./com/laykun/recast/SWIGTYPE_p_double.java
 ./com/laykun/recast/rcHeightfield.java
 ./com/laykun/recast/rcConfig.java
 ./com/laykun/recast/rcHeightfieldLayer.java
