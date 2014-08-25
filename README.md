@@ -7,7 +7,7 @@ EXPERIMENTAL
 
 Currently build script only supports Linux x64. Will work on ant build description later.
 
-Purpose:
+Purpose
 --------------
 
 To have a one to one wrapper of the recast navigation system wrapped with JNI for full functionality. This will include the detour system as well as the recast nav mesh generation system.
