@@ -264,6 +264,38 @@ static void int_array_setitem(int *ary, int index, int value) {
 }
 
 
+static char *new_char_array(int nelements) { 
+  return new char[nelements]; 
+}
+
+static void delete_char_array(char *ary) { 
+  delete [] ary; 
+}
+
+static char char_array_getitem(char *ary, int index) {
+    return ary[index];
+}
+static void char_array_setitem(char *ary, int index, char value) {
+    ary[index] = value;
+}
+
+
+static unsigned char *new_unsigned_char_array(int nelements) { 
+  return new unsigned char[nelements]; 
+}
+
+static void delete_unsigned_char_array(unsigned char *ary) { 
+  delete [] ary; 
+}
+
+static unsigned char unsigned_char_array_getitem(unsigned char *ary, int index) {
+    return ary[index];
+}
+static void unsigned_char_array_setitem(unsigned char *ary, int index, unsigned char value) {
+    ary[index] = value;
+}
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -427,6 +459,129 @@ SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_int_1array_1setitem(JNI
   arg2 = (int)jarg2; 
   arg3 = (int)jarg3; 
   int_array_setitem(arg1,arg2,arg3);
+}
+
+
+SWIGEXPORT jstring JNICALL Java_com_laykun_recast_RecastJNI_new_1char_1array(JNIEnv *jenv, jclass jcls, jint jarg1) {
+  jstring jresult = 0 ;
+  int arg1 ;
+  char *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (int)jarg1; 
+  result = (char *)new_char_array(arg1);
+  if (result) jresult = jenv->NewStringUTF((const char *)result);
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_delete_1char_1array(JNIEnv *jenv, jclass jcls, jstring jarg1) {
+  char *arg1 = (char *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = 0;
+  if (jarg1) {
+    arg1 = (char *)jenv->GetStringUTFChars(jarg1, 0);
+    if (!arg1) return ;
+  }
+  delete_char_array(arg1);
+  if (arg1) jenv->ReleaseStringUTFChars(jarg1, (const char *)arg1);
+}
+
+
+SWIGEXPORT jchar JNICALL Java_com_laykun_recast_RecastJNI_char_1array_1getitem(JNIEnv *jenv, jclass jcls, jstring jarg1, jint jarg2) {
+  jchar jresult = 0 ;
+  char *arg1 = (char *) 0 ;
+  int arg2 ;
+  char result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = 0;
+  if (jarg1) {
+    arg1 = (char *)jenv->GetStringUTFChars(jarg1, 0);
+    if (!arg1) return 0;
+  }
+  arg2 = (int)jarg2; 
+  result = (char)char_array_getitem(arg1,arg2);
+  jresult = (jchar)result; 
+  if (arg1) jenv->ReleaseStringUTFChars(jarg1, (const char *)arg1);
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_char_1array_1setitem(JNIEnv *jenv, jclass jcls, jstring jarg1, jint jarg2, jchar jarg3) {
+  char *arg1 = (char *) 0 ;
+  int arg2 ;
+  char arg3 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = 0;
+  if (jarg1) {
+    arg1 = (char *)jenv->GetStringUTFChars(jarg1, 0);
+    if (!arg1) return ;
+  }
+  arg2 = (int)jarg2; 
+  arg3 = (char)jarg3; 
+  char_array_setitem(arg1,arg2,arg3);
+  if (arg1) jenv->ReleaseStringUTFChars(jarg1, (const char *)arg1);
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_new_1unsigned_1char_1array(JNIEnv *jenv, jclass jcls, jint jarg1) {
+  jlong jresult = 0 ;
+  int arg1 ;
+  unsigned char *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (int)jarg1; 
+  result = (unsigned char *)new_unsigned_char_array(arg1);
+  *(unsigned char **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_delete_1unsigned_1char_1array(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  unsigned char *arg1 = (unsigned char *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(unsigned char **)&jarg1; 
+  delete_unsigned_char_array(arg1);
+}
+
+
+SWIGEXPORT jshort JNICALL Java_com_laykun_recast_RecastJNI_unsigned_1char_1array_1getitem(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2) {
+  jshort jresult = 0 ;
+  unsigned char *arg1 = (unsigned char *) 0 ;
+  int arg2 ;
+  unsigned char result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(unsigned char **)&jarg1; 
+  arg2 = (int)jarg2; 
+  result = (unsigned char)unsigned_char_array_getitem(arg1,arg2);
+  jresult = (jshort)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_unsigned_1char_1array_1setitem(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2, jshort jarg3) {
+  unsigned char *arg1 = (unsigned char *) 0 ;
+  int arg2 ;
+  unsigned char arg3 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(unsigned char **)&jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = (unsigned char)jarg3; 
+  unsigned_char_array_setitem(arg1,arg2,arg3);
 }
 
 
