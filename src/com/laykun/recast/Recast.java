@@ -60,6 +60,39 @@ public class Recast {
     RecastJNI.int_array_setitem(SWIGTYPE_p_int.getCPtr(ary), index, value);
   }
 
+  public static String new_char_array(int nelements) {
+    return RecastJNI.new_char_array(nelements);
+  }
+
+  public static void delete_char_array(String ary) {
+    RecastJNI.delete_char_array(ary);
+  }
+
+  public static char char_array_getitem(String ary, int index) {
+    return RecastJNI.char_array_getitem(ary, index);
+  }
+
+  public static void char_array_setitem(String ary, int index, char value) {
+    RecastJNI.char_array_setitem(ary, index, value);
+  }
+
+  public static SWIGTYPE_p_unsigned_char new_unsigned_char_array(int nelements) {
+    long cPtr = RecastJNI.new_unsigned_char_array(nelements);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_unsigned_char(cPtr, false);
+  }
+
+  public static void delete_unsigned_char_array(SWIGTYPE_p_unsigned_char ary) {
+    RecastJNI.delete_unsigned_char_array(SWIGTYPE_p_unsigned_char.getCPtr(ary));
+  }
+
+  public static short unsigned_char_array_getitem(SWIGTYPE_p_unsigned_char ary, int index) {
+    return RecastJNI.unsigned_char_array_getitem(SWIGTYPE_p_unsigned_char.getCPtr(ary), index);
+  }
+
+  public static void unsigned_char_array_setitem(SWIGTYPE_p_unsigned_char ary, int index, short value) {
+    RecastJNI.unsigned_char_array_setitem(SWIGTYPE_p_unsigned_char.getCPtr(ary), index, value);
+  }
+
   public static int getRC_CONTOUR_REG_MASK() {
     return RecastJNI.RC_CONTOUR_REG_MASK_get();
   }
