@@ -29,6 +29,10 @@ public class RecastJNI {
   public final static native void delete_unsigned_char_array(long jarg1);
   public final static native short unsigned_char_array_getitem(long jarg1, int jarg2);
   public final static native void unsigned_char_array_setitem(long jarg1, int jarg2, short jarg3);
+  public final static native long new_unsigned_int_array(int jarg1);
+  public final static native void delete_unsigned_int_array(long jarg1);
+  public final static native long unsigned_int_array_getitem(long jarg1, int jarg2);
+  public final static native void unsigned_int_array_setitem(long jarg1, int jarg2, long jarg3);
   public final static native int RC_CONTOUR_REG_MASK_get();
   public final static native int RC_MESH_NULL_IDX_get();
   public final static native short RC_NULL_AREA_get();

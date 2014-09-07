@@ -1,3 +1,5 @@
 #!/bin/bash
-Recast/build.sh
-Detour/build.sh
+cd Recast
+./build.sh
+cd ../Detour
+./build.sh

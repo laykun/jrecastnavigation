@@ -11,6 +11,7 @@
 %array_functions( int, int_array )
 %array_functions( char, char_array )
 %array_functions( unsigned char, unsigned_char_array )
+%array_functions( unsigned int, unsigned_int_array )
 
 //CONSTS
 /// Applied to the region id field of contour vertices in order to extract the region id.

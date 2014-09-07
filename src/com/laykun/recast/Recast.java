@@ -93,6 +93,23 @@ public class Recast {
     RecastJNI.unsigned_char_array_setitem(SWIGTYPE_p_unsigned_char.getCPtr(ary), index, value);
   }
 
+  public static SWIGTYPE_p_unsigned_int new_unsigned_int_array(int nelements) {
+    long cPtr = RecastJNI.new_unsigned_int_array(nelements);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_unsigned_int(cPtr, false);
+  }
+
+  public static void delete_unsigned_int_array(SWIGTYPE_p_unsigned_int ary) {
+    RecastJNI.delete_unsigned_int_array(SWIGTYPE_p_unsigned_int.getCPtr(ary));
+  }
+
+  public static long unsigned_int_array_getitem(SWIGTYPE_p_unsigned_int ary, int index) {
+    return RecastJNI.unsigned_int_array_getitem(SWIGTYPE_p_unsigned_int.getCPtr(ary), index);
+  }
+
+  public static void unsigned_int_array_setitem(SWIGTYPE_p_unsigned_int ary, int index, long value) {
+    RecastJNI.unsigned_int_array_setitem(SWIGTYPE_p_unsigned_int.getCPtr(ary), index, value);
+  }
+
   public static int getRC_CONTOUR_REG_MASK() {
     return RecastJNI.RC_CONTOUR_REG_MASK_get();
   }
