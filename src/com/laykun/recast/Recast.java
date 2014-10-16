@@ -332,4 +332,74 @@ public class Recast {
     RecastJNI.rcFreePolyMeshDetail(rcPolyMeshDetail.getCPtr(dmesh), dmesh);
   }
 
+  public static int getDT_VERTS_PER_POLYGON() {
+    return RecastJNI.DT_VERTS_PER_POLYGON_get();
+  }
+
+  public static int getDT_NAVMESH_MAGIC() {
+    return RecastJNI.DT_NAVMESH_MAGIC_get();
+  }
+
+  public static int getDT_NAVMESH_VERSION() {
+    return RecastJNI.DT_NAVMESH_VERSION_get();
+  }
+
+  public static int getDT_NAVMESH_STATE_MAGIC() {
+    return RecastJNI.DT_NAVMESH_STATE_MAGIC_get();
+  }
+
+  public static int getDT_NAVMESH_STATE_VERSION() {
+    return RecastJNI.DT_NAVMESH_STATE_VERSION_get();
+  }
+
+  public static int getDT_EXT_LINK() {
+    return RecastJNI.DT_EXT_LINK_get();
+  }
+
+  public static long getDT_NULL_LINK() {
+    return RecastJNI.DT_NULL_LINK_get();
+  }
+
+  public static long getDT_OFFMESH_CON_BIDIR() {
+    return RecastJNI.DT_OFFMESH_CON_BIDIR_get();
+  }
+
+  public static int getDT_MAX_AREAS() {
+    return RecastJNI.DT_MAX_AREAS_get();
+  }
+
+  public static float getDT_RAY_CAST_LIMIT_PROPORTIONS() {
+    return RecastJNI.DT_RAY_CAST_LIMIT_PROPORTIONS_get();
+  }
+
+  public static dtNavMesh dtAllocNavMesh() {
+    long cPtr = RecastJNI.dtAllocNavMesh();
+    return (cPtr == 0) ? null : new dtNavMesh(cPtr, false);
+  }
+
+  public static void dtFreeNavMesh(dtNavMesh navmesh) {
+    RecastJNI.dtFreeNavMesh(dtNavMesh.getCPtr(navmesh), navmesh);
+  }
+
+  public static boolean dtCreateNavMeshData(dtNavMeshCreateParams params, SWIGTYPE_p_p_unsigned_char outData, SWIGTYPE_p_int outDataSize) {
+    return RecastJNI.dtCreateNavMeshData(dtNavMeshCreateParams.getCPtr(params), params, SWIGTYPE_p_p_unsigned_char.getCPtr(outData), SWIGTYPE_p_int.getCPtr(outDataSize));
+  }
+
+  public static boolean dtNavMeshHeaderSwapEndian(SWIGTYPE_p_unsigned_char data, int dataSize) {
+    return RecastJNI.dtNavMeshHeaderSwapEndian(SWIGTYPE_p_unsigned_char.getCPtr(data), dataSize);
+  }
+
+  public static boolean dtNavMeshDataSwapEndian(SWIGTYPE_p_unsigned_char data, int dataSize) {
+    return RecastJNI.dtNavMeshDataSwapEndian(SWIGTYPE_p_unsigned_char.getCPtr(data), dataSize);
+  }
+
+  public static dtNavMeshQuery dtAllocNavMeshQuery() {
+    long cPtr = RecastJNI.dtAllocNavMeshQuery();
+    return (cPtr == 0) ? null : new dtNavMeshQuery(cPtr, false);
+  }
+
+  public static void dtFreeNavMeshQuery(dtNavMeshQuery query) {
+    RecastJNI.dtFreeNavMeshQuery(dtNavMeshQuery.getCPtr(query), query);
+  }
+
 }
