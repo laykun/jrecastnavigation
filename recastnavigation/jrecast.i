@@ -20,6 +20,7 @@
 %array_functions( int, int_array )
 %array_functions( char, char_array )
 %array_functions( unsigned char, unsigned_char_array )
+%array_functions( unsigned char *, unsigned_char_array_array )
 %array_functions( unsigned int, unsigned_int_array )
 
 //CONSTS
@@ -1955,3 +1956,246 @@ dtNavMeshQuery* dtAllocNavMeshQuery();
 void dtFreeNavMeshQuery(dtNavMeshQuery* query);
 
 #endif // DETOURNAVMESHQUERY_H
+
+
+#ifndef DETOURSTATUS_H
+#define DETOURSTATUS_H
+
+typedef unsigned int dtStatus;
+
+// High level status.
+static const unsigned int DT_FAILURE = 1u << 31;			// Operation failed.
+static const unsigned int DT_SUCCESS = 1u << 30;			// Operation succeed.
+static const unsigned int DT_IN_PROGRESS = 1u << 29;		// Operation still in progress.
+
+// Detail information for status.
+static const unsigned int DT_STATUS_DETAIL_MASK = 0x0ffffff;
+static const unsigned int DT_WRONG_MAGIC = 1 << 0;		// Input data is not recognized.
+static const unsigned int DT_WRONG_VERSION = 1 << 1;	// Input data is in wrong version.
+static const unsigned int DT_OUT_OF_MEMORY = 1 << 2;	// Operation ran out of memory.
+static const unsigned int DT_INVALID_PARAM = 1 << 3;	// An input parameter was invalid.
+static const unsigned int DT_BUFFER_TOO_SMALL = 1 << 4;	// Result buffer for the query was too small to store all results.
+static const unsigned int DT_OUT_OF_NODES = 1 << 5;		// Query ran out of nodes during search.
+static const unsigned int DT_PARTIAL_RESULT = 1 << 6;	// Query did not reach the end location, returning best guess. 
+
+
+// Returns true of status is success.
+inline bool dtStatusSucceed(dtStatus status)
+{
+	return (status & DT_SUCCESS) != 0;
+}
+
+// Returns true of status is failure.
+inline bool dtStatusFailed(dtStatus status)
+{
+	return (status & DT_FAILURE) != 0;
+}
+
+// Returns true of status is in progress.
+inline bool dtStatusInProgress(dtStatus status)
+{
+	return (status & DT_IN_PROGRESS) != 0;
+}
+
+// Returns true if specific detail is set.
+inline bool dtStatusDetail(dtStatus status, unsigned int detail)
+{
+	return (status & detail) != 0;
+}
+
+#endif // DETOURSTATUS_H
+
+#ifndef DETOURNODE_H
+#define DETOURNODE_H
+
+#include "DetourNavMesh.h"
+
+enum dtNodeFlags
+{
+	DT_NODE_OPEN = 0x01,
+	DT_NODE_CLOSED = 0x02,
+	DT_NODE_PARENT_DETACHED = 0x04, // parent of the node is not adjacent. Found using raycast.
+};
+
+typedef unsigned short dtNodeIndex;
+static const dtNodeIndex DT_NULL_IDX = (dtNodeIndex)~0;
+
+struct dtNode
+{
+	float pos[3];				///< Position of the node.
+	float cost;					///< Cost from previous node to current node.
+	float total;				///< Cost up to the node.
+	unsigned int pidx : 24;		///< Index to parent node.
+	unsigned int state : 2;		///< extra state information. A polyRef can have multiple nodes with different extra info. see DT_MAX_STATES_PER_NODE
+	unsigned int flags : 3;		///< Node flags. A combination of dtNodeFlags.
+	dtPolyRef id;				///< Polygon ref the node corresponds to.
+};
+
+
+static const int DT_MAX_STATES_PER_NODE = 4;	// number of extra states per node. See dtNode::state
+
+
+
+class dtNodePool
+{
+public:
+	dtNodePool(int maxNodes, int hashSize);
+	~dtNodePool();
+	inline void operator=(const dtNodePool&) {}
+	void clear();
+
+	// Get a dtNode by ref and extra state information. If there is none then - allocate
+	// There can be more than one node for the same polyRef but with different extra state information
+	dtNode* getNode(dtPolyRef id, unsigned char state=0);	
+	dtNode* findNode(dtPolyRef id, unsigned char state);
+	unsigned int findNodes(dtPolyRef id, dtNode** nodes, const int maxNodes);
+
+	inline unsigned int getNodeIdx(const dtNode* node) const
+	{
+		if (!node) return 0;
+		return (unsigned int)(node - m_nodes)+1;
+	}
+
+	inline dtNode* getNodeAtIdx(unsigned int idx)
+	{
+		if (!idx) return 0;
+		return &m_nodes[idx-1];
+	}
+
+	inline const dtNode* getNodeAtIdx(unsigned int idx) const
+	{
+		if (!idx) return 0;
+		return &m_nodes[idx-1];
+	}
+	
+	inline int getMemUsed() const
+	{
+		return sizeof(*this) +
+			sizeof(dtNode)*m_maxNodes +
+			sizeof(dtNodeIndex)*m_maxNodes +
+			sizeof(dtNodeIndex)*m_hashSize;
+	}
+	
+	inline int getMaxNodes() const { return m_maxNodes; }
+	
+	inline int getHashSize() const { return m_hashSize; }
+	inline dtNodeIndex getFirst(int bucket) const { return m_first[bucket]; }
+	inline dtNodeIndex getNext(int i) const { return m_next[i]; }
+	inline int getNodeCount() const { return m_nodeCount; }
+	
+private:
+	
+	dtNode* m_nodes;
+	dtNodeIndex* m_first;
+	dtNodeIndex* m_next;
+	const int m_maxNodes;
+	const int m_hashSize;
+	int m_nodeCount;
+};
+
+class dtNodeQueue
+{
+public:
+	dtNodeQueue(int n);
+	~dtNodeQueue();
+	inline void operator=(dtNodeQueue&) {}
+	
+	inline void clear()
+	{
+		m_size = 0;
+	}
+	
+	inline dtNode* top()
+	{
+		return m_heap[0];
+	}
+	
+	inline dtNode* pop()
+	{
+		dtNode* result = m_heap[0];
+		m_size--;
+		trickleDown(0, m_heap[m_size]);
+		return result;
+	}
+	
+	inline void push(dtNode* node)
+	{
+		m_size++;
+		bubbleUp(m_size-1, node);
+	}
+	
+	inline void modify(dtNode* node)
+	{
+		for (int i = 0; i < m_size; ++i)
+		{
+			if (m_heap[i] == node)
+			{
+				bubbleUp(i, node);
+				return;
+			}
+		}
+	}
+	
+	inline bool empty() const { return m_size == 0; }
+	
+	inline int getMemUsed() const
+	{
+		return sizeof(*this) +
+		sizeof(dtNode*)*(m_capacity+1);
+	}
+	
+	inline int getCapacity() const { return m_capacity; }
+	
+private:
+	void bubbleUp(int i, dtNode* node);
+	void trickleDown(int i, dtNode* node);
+	
+	dtNode** m_heap;
+	const int m_capacity;
+	int m_size;
+};		
+
+
+#endif // DETOURNODE_H
+
+#ifndef DETOURALLOCATOR_H
+#define DETOURALLOCATOR_H
+
+/// Provides hint values to the memory allocator on how long the
+/// memory is expected to be used.
+enum dtAllocHint
+{
+	DT_ALLOC_PERM,		///< Memory persist after a function call.
+	DT_ALLOC_TEMP		///< Memory used temporarily within a function.
+};
+
+/// A memory allocation function.
+//  @param[in]		size			The size, in bytes of memory, to allocate.
+//  @param[in]		rcAllocHint	A hint to the allocator on how long the memory is expected to be in use.
+//  @return A pointer to the beginning of the allocated memory block, or null if the allocation failed.
+///  @see dtAllocSetCustom
+typedef void* (dtAllocFunc)(int size, dtAllocHint hint);
+
+/// A memory deallocation function.
+///  @param[in]		ptr		A pointer to a memory block previously allocated using #dtAllocFunc.
+/// @see dtAllocSetCustom
+typedef void (dtFreeFunc)(void* ptr);
+
+/// Sets the base custom allocation functions to be used by Detour.
+///  @param[in]		allocFunc	The memory allocation function to be used by #dtAlloc
+///  @param[in]		freeFunc	The memory de-allocation function to be used by #dtFree
+void dtAllocSetCustom(dtAllocFunc *allocFunc, dtFreeFunc *freeFunc);
+
+/// Allocates a memory block.
+///  @param[in]		size	The size, in bytes of memory, to allocate.
+///  @param[in]		hint	A hint to the allocator on how long the memory is expected to be in use.
+///  @return A pointer to the beginning of the allocated memory block, or null if the allocation failed.
+/// @see dtFree
+void* dtAlloc(int size, dtAllocHint hint);
+
+/// Deallocates a memory block.
+///  @param[in]		ptr		A pointer to a memory block previously allocated using #dtAlloc.
+/// @see dtAlloc
+void dtFree(void* ptr);
+
+#endif

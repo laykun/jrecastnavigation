@@ -1,3 +1,4 @@
+C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtAllocHint.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtBVNode.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtFindPathOptions.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtLink.java
@@ -7,6 +8,10 @@ C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtNavMe
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtNavMeshCreateParams.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtNavMeshParams.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtNavMeshQuery.java
+C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtNode.java
+C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtNodeFlags.java
+C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtNodePool.java
+C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtNodeQueue.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtOffMeshConnection.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtPoly.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\dtPolyDetail.java
@@ -41,14 +46,19 @@ C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYP
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_dtNodePool.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_dtStatus.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_float.java
+C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_f_int_enum_dtAllocHint__p_void.java
+C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_f_p_void__void.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_f___float.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_int.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_p_dtMeshTile.java
+C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_p_dtNode.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_p_dtPoly.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_p_rcPolyMesh.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_p_rcPolyMeshDetail.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_p_rcSpan.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_p_unsigned_char.java
+C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_string.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_unsigned_char.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_unsigned_int.java
 C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_unsigned_short.java
+C:\Users\laykun\Documents\Source\jrecastnavigation\src\com\laykun\recast\SWIGTYPE_p_void.java

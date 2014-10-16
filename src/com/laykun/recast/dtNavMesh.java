@@ -39,12 +39,12 @@ public class dtNavMesh {
     this(RecastJNI.new_dtNavMesh(), true);
   }
 
-  public SWIGTYPE_p_dtStatus init(dtNavMeshParams params) {
-    return new SWIGTYPE_p_dtStatus(RecastJNI.dtNavMesh_init__SWIG_0(swigCPtr, this, dtNavMeshParams.getCPtr(params), params), true);
+  public long init(dtNavMeshParams params) {
+    return RecastJNI.dtNavMesh_init__SWIG_0(swigCPtr, this, dtNavMeshParams.getCPtr(params), params);
   }
 
-  public SWIGTYPE_p_dtStatus init(SWIGTYPE_p_unsigned_char data, int dataSize, int flags) {
-    return new SWIGTYPE_p_dtStatus(RecastJNI.dtNavMesh_init__SWIG_1(swigCPtr, this, SWIGTYPE_p_unsigned_char.getCPtr(data), dataSize, flags), true);
+  public long init(SWIGTYPE_p_unsigned_char data, int dataSize, int flags) {
+    return RecastJNI.dtNavMesh_init__SWIG_1(swigCPtr, this, SWIGTYPE_p_unsigned_char.getCPtr(data), dataSize, flags);
   }
 
   public dtNavMeshParams getParams() {
@@ -52,12 +52,12 @@ public class dtNavMesh {
     return (cPtr == 0) ? null : new dtNavMeshParams(cPtr, false);
   }
 
-  public SWIGTYPE_p_dtStatus addTile(SWIGTYPE_p_unsigned_char data, int dataSize, int flags, long lastRef, SWIGTYPE_p_unsigned_int result) {
-    return new SWIGTYPE_p_dtStatus(RecastJNI.dtNavMesh_addTile(swigCPtr, this, SWIGTYPE_p_unsigned_char.getCPtr(data), dataSize, flags, lastRef, SWIGTYPE_p_unsigned_int.getCPtr(result)), true);
+  public long addTile(SWIGTYPE_p_unsigned_char data, int dataSize, int flags, long lastRef, SWIGTYPE_p_unsigned_int result) {
+    return RecastJNI.dtNavMesh_addTile(swigCPtr, this, SWIGTYPE_p_unsigned_char.getCPtr(data), dataSize, flags, lastRef, SWIGTYPE_p_unsigned_int.getCPtr(result));
   }
 
-  public SWIGTYPE_p_dtStatus removeTile(long ref, SWIGTYPE_p_p_unsigned_char data, SWIGTYPE_p_int dataSize) {
-    return new SWIGTYPE_p_dtStatus(RecastJNI.dtNavMesh_removeTile(swigCPtr, this, ref, SWIGTYPE_p_p_unsigned_char.getCPtr(data), SWIGTYPE_p_int.getCPtr(dataSize)), true);
+  public long removeTile(long ref, SWIGTYPE_p_p_unsigned_char data, SWIGTYPE_p_int dataSize) {
+    return RecastJNI.dtNavMesh_removeTile(swigCPtr, this, ref, SWIGTYPE_p_p_unsigned_char.getCPtr(data), SWIGTYPE_p_int.getCPtr(dataSize));
   }
 
   public void calcTileLoc(SWIGTYPE_p_float pos, SWIGTYPE_p_int tx, SWIGTYPE_p_int ty) {
@@ -95,8 +95,8 @@ public class dtNavMesh {
     return (cPtr == 0) ? null : new dtMeshTile(cPtr, false);
   }
 
-  public SWIGTYPE_p_dtStatus getTileAndPolyByRef(long ref, SWIGTYPE_p_p_dtMeshTile tile, SWIGTYPE_p_p_dtPoly poly) {
-    return new SWIGTYPE_p_dtStatus(RecastJNI.dtNavMesh_getTileAndPolyByRef(swigCPtr, this, ref, SWIGTYPE_p_p_dtMeshTile.getCPtr(tile), SWIGTYPE_p_p_dtPoly.getCPtr(poly)), true);
+  public long getTileAndPolyByRef(long ref, SWIGTYPE_p_p_dtMeshTile tile, SWIGTYPE_p_p_dtPoly poly) {
+    return RecastJNI.dtNavMesh_getTileAndPolyByRef(swigCPtr, this, ref, SWIGTYPE_p_p_dtMeshTile.getCPtr(tile), SWIGTYPE_p_p_dtPoly.getCPtr(poly));
   }
 
   public void getTileAndPolyByRefUnsafe(long ref, SWIGTYPE_p_p_dtMeshTile tile, SWIGTYPE_p_p_dtPoly poly) {
@@ -111,8 +111,8 @@ public class dtNavMesh {
     return RecastJNI.dtNavMesh_getPolyRefBase(swigCPtr, this, dtMeshTile.getCPtr(tile), tile);
   }
 
-  public SWIGTYPE_p_dtStatus getOffMeshConnectionPolyEndPoints(long prevRef, long polyRef, SWIGTYPE_p_float startPos, SWIGTYPE_p_float endPos) {
-    return new SWIGTYPE_p_dtStatus(RecastJNI.dtNavMesh_getOffMeshConnectionPolyEndPoints(swigCPtr, this, prevRef, polyRef, SWIGTYPE_p_float.getCPtr(startPos), SWIGTYPE_p_float.getCPtr(endPos)), true);
+  public long getOffMeshConnectionPolyEndPoints(long prevRef, long polyRef, SWIGTYPE_p_float startPos, SWIGTYPE_p_float endPos) {
+    return RecastJNI.dtNavMesh_getOffMeshConnectionPolyEndPoints(swigCPtr, this, prevRef, polyRef, SWIGTYPE_p_float.getCPtr(startPos), SWIGTYPE_p_float.getCPtr(endPos));
   }
 
   public dtOffMeshConnection getOffMeshConnectionByRef(long ref) {
@@ -120,32 +120,32 @@ public class dtNavMesh {
     return (cPtr == 0) ? null : new dtOffMeshConnection(cPtr, false);
   }
 
-  public SWIGTYPE_p_dtStatus setPolyFlags(long ref, int flags) {
-    return new SWIGTYPE_p_dtStatus(RecastJNI.dtNavMesh_setPolyFlags(swigCPtr, this, ref, flags), true);
+  public long setPolyFlags(long ref, int flags) {
+    return RecastJNI.dtNavMesh_setPolyFlags(swigCPtr, this, ref, flags);
   }
 
-  public SWIGTYPE_p_dtStatus getPolyFlags(long ref, SWIGTYPE_p_unsigned_short resultFlags) {
-    return new SWIGTYPE_p_dtStatus(RecastJNI.dtNavMesh_getPolyFlags(swigCPtr, this, ref, SWIGTYPE_p_unsigned_short.getCPtr(resultFlags)), true);
+  public long getPolyFlags(long ref, SWIGTYPE_p_unsigned_short resultFlags) {
+    return RecastJNI.dtNavMesh_getPolyFlags(swigCPtr, this, ref, SWIGTYPE_p_unsigned_short.getCPtr(resultFlags));
   }
 
-  public SWIGTYPE_p_dtStatus setPolyArea(long ref, short area) {
-    return new SWIGTYPE_p_dtStatus(RecastJNI.dtNavMesh_setPolyArea(swigCPtr, this, ref, area), true);
+  public long setPolyArea(long ref, short area) {
+    return RecastJNI.dtNavMesh_setPolyArea(swigCPtr, this, ref, area);
   }
 
-  public SWIGTYPE_p_dtStatus getPolyArea(long ref, SWIGTYPE_p_unsigned_char resultArea) {
-    return new SWIGTYPE_p_dtStatus(RecastJNI.dtNavMesh_getPolyArea(swigCPtr, this, ref, SWIGTYPE_p_unsigned_char.getCPtr(resultArea)), true);
+  public long getPolyArea(long ref, SWIGTYPE_p_unsigned_char resultArea) {
+    return RecastJNI.dtNavMesh_getPolyArea(swigCPtr, this, ref, SWIGTYPE_p_unsigned_char.getCPtr(resultArea));
   }
 
   public int getTileStateSize(dtMeshTile tile) {
     return RecastJNI.dtNavMesh_getTileStateSize(swigCPtr, this, dtMeshTile.getCPtr(tile), tile);
   }
 
-  public SWIGTYPE_p_dtStatus storeTileState(dtMeshTile tile, SWIGTYPE_p_unsigned_char data, int maxDataSize) {
-    return new SWIGTYPE_p_dtStatus(RecastJNI.dtNavMesh_storeTileState(swigCPtr, this, dtMeshTile.getCPtr(tile), tile, SWIGTYPE_p_unsigned_char.getCPtr(data), maxDataSize), true);
+  public long storeTileState(dtMeshTile tile, SWIGTYPE_p_unsigned_char data, int maxDataSize) {
+    return RecastJNI.dtNavMesh_storeTileState(swigCPtr, this, dtMeshTile.getCPtr(tile), tile, SWIGTYPE_p_unsigned_char.getCPtr(data), maxDataSize);
   }
 
-  public SWIGTYPE_p_dtStatus restoreTileState(dtMeshTile tile, SWIGTYPE_p_unsigned_char data, int maxDataSize) {
-    return new SWIGTYPE_p_dtStatus(RecastJNI.dtNavMesh_restoreTileState(swigCPtr, this, dtMeshTile.getCPtr(tile), tile, SWIGTYPE_p_unsigned_char.getCPtr(data), maxDataSize), true);
+  public long restoreTileState(dtMeshTile tile, SWIGTYPE_p_unsigned_char data, int maxDataSize) {
+    return RecastJNI.dtNavMesh_restoreTileState(swigCPtr, this, dtMeshTile.getCPtr(tile), tile, SWIGTYPE_p_unsigned_char.getCPtr(data), maxDataSize);
   }
 
   public long encodePolyId(long salt, long it, long ip) {

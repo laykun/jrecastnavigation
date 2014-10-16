@@ -93,6 +93,24 @@ public class Recast {
     RecastJNI.unsigned_char_array_setitem(SWIGTYPE_p_unsigned_char.getCPtr(ary), index, value);
   }
 
+  public static SWIGTYPE_p_p_unsigned_char new_unsigned_char_array_array(int nelements) {
+    long cPtr = RecastJNI.new_unsigned_char_array_array(nelements);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_p_unsigned_char(cPtr, false);
+  }
+
+  public static void delete_unsigned_char_array_array(SWIGTYPE_p_p_unsigned_char ary) {
+    RecastJNI.delete_unsigned_char_array_array(SWIGTYPE_p_p_unsigned_char.getCPtr(ary));
+  }
+
+  public static SWIGTYPE_p_unsigned_char unsigned_char_array_array_getitem(SWIGTYPE_p_p_unsigned_char ary, int index) {
+    long cPtr = RecastJNI.unsigned_char_array_array_getitem(SWIGTYPE_p_p_unsigned_char.getCPtr(ary), index);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_unsigned_char(cPtr, false);
+  }
+
+  public static void unsigned_char_array_array_setitem(SWIGTYPE_p_p_unsigned_char ary, int index, SWIGTYPE_p_unsigned_char value) {
+    RecastJNI.unsigned_char_array_array_setitem(SWIGTYPE_p_p_unsigned_char.getCPtr(ary), index, SWIGTYPE_p_unsigned_char.getCPtr(value));
+  }
+
   public static SWIGTYPE_p_unsigned_int new_unsigned_int_array(int nelements) {
     long cPtr = RecastJNI.new_unsigned_int_array(nelements);
     return (cPtr == 0) ? null : new SWIGTYPE_p_unsigned_int(cPtr, false);
@@ -400,6 +418,87 @@ public class Recast {
 
   public static void dtFreeNavMeshQuery(dtNavMeshQuery query) {
     RecastJNI.dtFreeNavMeshQuery(dtNavMeshQuery.getCPtr(query), query);
+  }
+
+  public static long getDT_FAILURE() {
+    return RecastJNI.DT_FAILURE_get();
+  }
+
+  public static long getDT_SUCCESS() {
+    return RecastJNI.DT_SUCCESS_get();
+  }
+
+  public static long getDT_IN_PROGRESS() {
+    return RecastJNI.DT_IN_PROGRESS_get();
+  }
+
+  public static long getDT_STATUS_DETAIL_MASK() {
+    return RecastJNI.DT_STATUS_DETAIL_MASK_get();
+  }
+
+  public static long getDT_WRONG_MAGIC() {
+    return RecastJNI.DT_WRONG_MAGIC_get();
+  }
+
+  public static long getDT_WRONG_VERSION() {
+    return RecastJNI.DT_WRONG_VERSION_get();
+  }
+
+  public static long getDT_OUT_OF_MEMORY() {
+    return RecastJNI.DT_OUT_OF_MEMORY_get();
+  }
+
+  public static long getDT_INVALID_PARAM() {
+    return RecastJNI.DT_INVALID_PARAM_get();
+  }
+
+  public static long getDT_BUFFER_TOO_SMALL() {
+    return RecastJNI.DT_BUFFER_TOO_SMALL_get();
+  }
+
+  public static long getDT_OUT_OF_NODES() {
+    return RecastJNI.DT_OUT_OF_NODES_get();
+  }
+
+  public static long getDT_PARTIAL_RESULT() {
+    return RecastJNI.DT_PARTIAL_RESULT_get();
+  }
+
+  public static boolean dtStatusSucceed(long status) {
+    return RecastJNI.dtStatusSucceed(status);
+  }
+
+  public static boolean dtStatusFailed(long status) {
+    return RecastJNI.dtStatusFailed(status);
+  }
+
+  public static boolean dtStatusInProgress(long status) {
+    return RecastJNI.dtStatusInProgress(status);
+  }
+
+  public static boolean dtStatusDetail(long status, long detail) {
+    return RecastJNI.dtStatusDetail(status, detail);
+  }
+
+  public static int getDT_NULL_IDX() {
+    return RecastJNI.DT_NULL_IDX_get();
+  }
+
+  public static int getDT_MAX_STATES_PER_NODE() {
+    return RecastJNI.DT_MAX_STATES_PER_NODE_get();
+  }
+
+  public static void dtAllocSetCustom(SWIGTYPE_p_f_int_enum_dtAllocHint__p_void allocFunc, SWIGTYPE_p_f_p_void__void freeFunc) {
+    RecastJNI.dtAllocSetCustom(SWIGTYPE_p_f_int_enum_dtAllocHint__p_void.getCPtr(allocFunc), SWIGTYPE_p_f_p_void__void.getCPtr(freeFunc));
+  }
+
+  public static SWIGTYPE_p_void dtAlloc(int size, dtAllocHint hint) {
+    long cPtr = RecastJNI.dtAlloc(size, hint.swigValue());
+    return (cPtr == 0) ? null : new SWIGTYPE_p_void(cPtr, false);
+  }
+
+  public static void dtFree(SWIGTYPE_p_void ptr) {
+    RecastJNI.dtFree(SWIGTYPE_p_void.getCPtr(ptr));
   }
 
 }

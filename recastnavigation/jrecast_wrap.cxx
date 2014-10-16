@@ -305,6 +305,22 @@ static void unsigned_char_array_setitem(unsigned char *ary, int index, unsigned 
 }
 
 
+static unsigned char * *new_unsigned_char_array_array(int nelements) { 
+  return new unsigned char *[nelements]; 
+}
+
+static void delete_unsigned_char_array_array(unsigned char * *ary) { 
+  delete [] ary; 
+}
+
+static unsigned char * unsigned_char_array_array_getitem(unsigned char * *ary, int index) {
+    return ary[index];
+}
+static void unsigned_char_array_array_setitem(unsigned char * *ary, int index, unsigned char * value) {
+    ary[index] = value;
+}
+
+
 static unsigned int *new_unsigned_int_array(int nelements) { 
   return new unsigned int[nelements]; 
 }
@@ -607,6 +623,60 @@ SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_unsigned_1char_1array_1
   arg2 = (int)jarg2; 
   arg3 = (unsigned char)jarg3; 
   unsigned_char_array_setitem(arg1,arg2,arg3);
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_new_1unsigned_1char_1array_1array(JNIEnv *jenv, jclass jcls, jint jarg1) {
+  jlong jresult = 0 ;
+  int arg1 ;
+  unsigned char **result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (int)jarg1; 
+  result = (unsigned char **)new_unsigned_char_array_array(arg1);
+  *(unsigned char ***)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_delete_1unsigned_1char_1array_1array(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  unsigned char **arg1 = (unsigned char **) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(unsigned char ***)&jarg1; 
+  delete_unsigned_char_array_array(arg1);
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_unsigned_1char_1array_1array_1getitem(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2) {
+  jlong jresult = 0 ;
+  unsigned char **arg1 = (unsigned char **) 0 ;
+  int arg2 ;
+  unsigned char *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(unsigned char ***)&jarg1; 
+  arg2 = (int)jarg2; 
+  result = (unsigned char *)unsigned_char_array_array_getitem(arg1,arg2);
+  *(unsigned char **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_unsigned_1char_1array_1array_1setitem(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2, jlong jarg3) {
+  unsigned char **arg1 = (unsigned char **) 0 ;
+  int arg2 ;
+  unsigned char *arg3 = (unsigned char *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(unsigned char ***)&jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = *(unsigned char **)&jarg3; 
+  unsigned_char_array_array_setitem(arg1,arg2,arg3);
 }
 
 
@@ -7827,8 +7897,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMesh_1init_1_1SWI
   (void)jarg2_;
   arg1 = *(dtNavMesh **)&jarg1; 
   arg2 = *(dtNavMeshParams **)&jarg2; 
-  result = (arg1)->init((dtNavMeshParams const *)arg2);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)(arg1)->init((dtNavMeshParams const *)arg2);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -7848,8 +7918,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMesh_1init_1_1SWI
   arg2 = *(unsigned char **)&jarg2; 
   arg3 = (int)jarg3; 
   arg4 = (int)jarg4; 
-  result = (arg1)->init(arg2,arg3,arg4);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)(arg1)->init(arg2,arg3,arg4);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -7888,8 +7958,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMesh_1addTile(JNI
   arg4 = (int)jarg4; 
   arg5 = (dtTileRef)jarg5; 
   arg6 = *(dtTileRef **)&jarg6; 
-  result = (arg1)->addTile(arg2,arg3,arg4,arg5,arg6);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)(arg1)->addTile(arg2,arg3,arg4,arg5,arg6);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -7909,8 +7979,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMesh_1removeTile(
   arg2 = (dtTileRef)jarg2; 
   arg3 = *(unsigned char ***)&jarg3; 
   arg4 = *(int **)&jarg4; 
-  result = (arg1)->removeTile(arg2,arg3,arg4);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)(arg1)->removeTile(arg2,arg3,arg4);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -8079,8 +8149,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMesh_1getTileAndP
   arg2 = (dtPolyRef)jarg2; 
   arg3 = *(dtMeshTile ***)&jarg3; 
   arg4 = *(dtPoly ***)&jarg4; 
-  result = ((dtNavMesh const *)arg1)->getTileAndPolyByRef(arg2,(dtMeshTile const **)arg3,(dtPoly const **)arg4);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMesh const *)arg1)->getTileAndPolyByRef(arg2,(dtMeshTile const **)arg3,(dtPoly const **)arg4);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -8154,8 +8224,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMesh_1getOffMeshC
   arg3 = (dtPolyRef)jarg3; 
   arg4 = *(float **)&jarg4; 
   arg5 = *(float **)&jarg5; 
-  result = ((dtNavMesh const *)arg1)->getOffMeshConnectionPolyEndPoints(arg2,arg3,arg4,arg5);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMesh const *)arg1)->getOffMeshConnectionPolyEndPoints(arg2,arg3,arg4,arg5);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -8190,8 +8260,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMesh_1setPolyFlag
   arg1 = *(dtNavMesh **)&jarg1; 
   arg2 = (dtPolyRef)jarg2; 
   arg3 = (unsigned short)jarg3; 
-  result = (arg1)->setPolyFlags(arg2,arg3);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)(arg1)->setPolyFlags(arg2,arg3);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -8209,8 +8279,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMesh_1getPolyFlag
   arg1 = *(dtNavMesh **)&jarg1; 
   arg2 = (dtPolyRef)jarg2; 
   arg3 = *(unsigned short **)&jarg3; 
-  result = ((dtNavMesh const *)arg1)->getPolyFlags(arg2,arg3);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMesh const *)arg1)->getPolyFlags(arg2,arg3);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -8228,8 +8298,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMesh_1setPolyArea
   arg1 = *(dtNavMesh **)&jarg1; 
   arg2 = (dtPolyRef)jarg2; 
   arg3 = (unsigned char)jarg3; 
-  result = (arg1)->setPolyArea(arg2,arg3);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)(arg1)->setPolyArea(arg2,arg3);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -8247,8 +8317,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMesh_1getPolyArea
   arg1 = *(dtNavMesh **)&jarg1; 
   arg2 = (dtPolyRef)jarg2; 
   arg3 = *(unsigned char **)&jarg3; 
-  result = ((dtNavMesh const *)arg1)->getPolyArea(arg2,arg3);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMesh const *)arg1)->getPolyArea(arg2,arg3);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -8287,8 +8357,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMesh_1storeTileSt
   arg2 = *(dtMeshTile **)&jarg2; 
   arg3 = *(unsigned char **)&jarg3; 
   arg4 = (int)jarg4; 
-  result = ((dtNavMesh const *)arg1)->storeTileState((dtMeshTile const *)arg2,arg3,arg4);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMesh const *)arg1)->storeTileState((dtMeshTile const *)arg2,arg3,arg4);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -8309,8 +8379,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMesh_1restoreTile
   arg2 = *(dtMeshTile **)&jarg2; 
   arg3 = *(unsigned char **)&jarg3; 
   arg4 = (int)jarg4; 
-  result = (arg1)->restoreTileState(arg2,(unsigned char const *)arg3,arg4);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)(arg1)->restoreTileState(arg2,(unsigned char const *)arg3,arg4);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -9799,8 +9869,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1init(J
   arg1 = *(dtNavMeshQuery **)&jarg1; 
   arg2 = *(dtNavMesh **)&jarg2; 
   arg3 = (int)jarg3; 
-  result = (arg1)->init((dtNavMesh const *)arg2,arg3);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)(arg1)->init((dtNavMesh const *)arg2,arg3);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -9831,8 +9901,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1findPa
   arg7 = *(dtPolyRef **)&jarg7; 
   arg8 = *(int **)&jarg8; 
   arg9 = (int)jarg9; 
-  result = ((dtNavMeshQuery const *)arg1)->findPath(arg2,arg3,(float const *)arg4,(float const *)arg5,(dtQueryFilter const *)arg6,arg7,arg8,arg9);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findPath(arg2,arg3,(float const *)arg4,(float const *)arg5,(dtQueryFilter const *)arg6,arg7,arg8,arg9);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -9866,8 +9936,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1findSt
   arg9 = *(int **)&jarg9; 
   arg10 = (int)jarg10; 
   arg11 = (int)jarg11; 
-  result = ((dtNavMeshQuery const *)arg1)->findStraightPath((float const *)arg2,(float const *)arg3,(dtPolyRef const *)arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findStraightPath((float const *)arg2,(float const *)arg3,(dtPolyRef const *)arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -9899,8 +9969,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1findSt
   arg8 = *(dtPolyRef **)&jarg8; 
   arg9 = *(int **)&jarg9; 
   arg10 = (int)jarg10; 
-  result = ((dtNavMeshQuery const *)arg1)->findStraightPath((float const *)arg2,(float const *)arg3,(dtPolyRef const *)arg4,arg5,arg6,arg7,arg8,arg9,arg10);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findStraightPath((float const *)arg2,(float const *)arg3,(dtPolyRef const *)arg4,arg5,arg6,arg7,arg8,arg9,arg10);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -9927,8 +9997,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1initSl
   arg5 = *(float **)&jarg5; 
   arg6 = *(dtQueryFilter **)&jarg6; 
   arg7 = (unsigned int)jarg7; 
-  result = (arg1)->initSlicedFindPath(arg2,arg3,(float const *)arg4,(float const *)arg5,(dtQueryFilter const *)arg6,arg7);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)(arg1)->initSlicedFindPath(arg2,arg3,(float const *)arg4,(float const *)arg5,(dtQueryFilter const *)arg6,arg7);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -9953,8 +10023,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1initSl
   arg4 = *(float **)&jarg4; 
   arg5 = *(float **)&jarg5; 
   arg6 = *(dtQueryFilter **)&jarg6; 
-  result = (arg1)->initSlicedFindPath(arg2,arg3,(float const *)arg4,(float const *)arg5,(dtQueryFilter const *)arg6);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)(arg1)->initSlicedFindPath(arg2,arg3,(float const *)arg4,(float const *)arg5,(dtQueryFilter const *)arg6);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -9972,8 +10042,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1update
   arg1 = *(dtNavMeshQuery **)&jarg1; 
   arg2 = (int)jarg2; 
   arg3 = *(int **)&jarg3; 
-  result = (arg1)->updateSlicedFindPath(arg2,arg3);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)(arg1)->updateSlicedFindPath(arg2,arg3);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -9993,8 +10063,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1finali
   arg2 = *(dtPolyRef **)&jarg2; 
   arg3 = *(int **)&jarg3; 
   arg4 = (int)jarg4; 
-  result = (arg1)->finalizeSlicedFindPath(arg2,arg3,arg4);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)(arg1)->finalizeSlicedFindPath(arg2,arg3,arg4);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10018,8 +10088,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1finali
   arg4 = *(dtPolyRef **)&jarg4; 
   arg5 = *(int **)&jarg5; 
   arg6 = (int)jarg6; 
-  result = (arg1)->finalizeSlicedFindPathPartial((dtPolyRef const *)arg2,arg3,arg4,arg5,arg6);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)(arg1)->finalizeSlicedFindPathPartial((dtPolyRef const *)arg2,arg3,arg4,arg5,arg6);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10052,8 +10122,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1findPo
   arg8 = *(float **)&jarg8; 
   arg9 = *(int **)&jarg9; 
   arg10 = (int)jarg10; 
-  result = ((dtNavMeshQuery const *)arg1)->findPolysAroundCircle(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9,arg10);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findPolysAroundCircle(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9,arg10);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10086,8 +10156,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1findPo
   arg8 = *(float **)&jarg8; 
   arg9 = *(int **)&jarg9; 
   arg10 = (int)jarg10; 
-  result = ((dtNavMeshQuery const *)arg1)->findPolysAroundShape(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9,arg10);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findPolysAroundShape(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9,arg10);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10112,8 +10182,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1findNe
   arg4 = *(dtQueryFilter **)&jarg4; 
   arg5 = *(dtPolyRef **)&jarg5; 
   arg6 = *(float **)&jarg6; 
-  result = ((dtNavMeshQuery const *)arg1)->findNearestPoly((float const *)arg2,(float const *)arg3,(dtQueryFilter const *)arg4,arg5,arg6);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findNearestPoly((float const *)arg2,(float const *)arg3,(dtQueryFilter const *)arg4,arg5,arg6);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10140,8 +10210,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1queryP
   arg5 = *(dtPolyRef **)&jarg5; 
   arg6 = *(int **)&jarg6; 
   arg7 = (int)jarg7; 
-  result = ((dtNavMeshQuery const *)arg1)->queryPolygons((float const *)arg2,(float const *)arg3,(dtQueryFilter const *)arg4,arg5,arg6,arg7);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->queryPolygons((float const *)arg2,(float const *)arg3,(dtQueryFilter const *)arg4,arg5,arg6,arg7);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10172,8 +10242,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1findLo
   arg7 = *(dtPolyRef **)&jarg7; 
   arg8 = *(int **)&jarg8; 
   arg9 = (int)jarg9; 
-  result = ((dtNavMeshQuery const *)arg1)->findLocalNeighbourhood(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findLocalNeighbourhood(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10204,8 +10274,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1moveAl
   arg7 = *(dtPolyRef **)&jarg7; 
   arg8 = *(int **)&jarg8; 
   arg9 = (int)jarg9; 
-  result = ((dtNavMeshQuery const *)arg1)->moveAlongSurface(arg2,(float const *)arg3,(float const *)arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->moveAlongSurface(arg2,(float const *)arg3,(float const *)arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10238,8 +10308,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1raycas
   arg8 = *(dtPolyRef **)&jarg8; 
   arg9 = *(int **)&jarg9; 
   arg10 = (int)jarg10; 
-  result = ((dtNavMeshQuery const *)arg1)->raycast(arg2,(float const *)arg3,(float const *)arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9,arg10);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->raycast(arg2,(float const *)arg3,(float const *)arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8,arg9,arg10);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10269,8 +10339,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1raycas
   arg6 = (unsigned int)jarg6; 
   arg7 = *(dtRaycastHit **)&jarg7; 
   arg8 = (dtPolyRef)jarg8; 
-  result = ((dtNavMeshQuery const *)arg1)->raycast(arg2,(float const *)arg3,(float const *)arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->raycast(arg2,(float const *)arg3,(float const *)arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10298,8 +10368,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1raycas
   arg5 = *(dtQueryFilter **)&jarg5; 
   arg6 = (unsigned int)jarg6; 
   arg7 = *(dtRaycastHit **)&jarg7; 
-  result = ((dtNavMeshQuery const *)arg1)->raycast(arg2,(float const *)arg3,(float const *)arg4,(dtQueryFilter const *)arg5,arg6,arg7);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->raycast(arg2,(float const *)arg3,(float const *)arg4,(dtQueryFilter const *)arg5,arg6,arg7);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10328,8 +10398,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1findDi
   arg6 = *(float **)&jarg6; 
   arg7 = *(float **)&jarg7; 
   arg8 = *(float **)&jarg8; 
-  result = ((dtNavMeshQuery const *)arg1)->findDistanceToWall(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findDistanceToWall(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10356,8 +10426,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1getPol
   arg5 = *(dtPolyRef **)&jarg5; 
   arg6 = *(int **)&jarg6; 
   arg7 = (int)jarg7; 
-  result = ((dtNavMeshQuery const *)arg1)->getPolyWallSegments(arg2,(dtQueryFilter const *)arg3,arg4,arg5,arg6,arg7);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->getPolyWallSegments(arg2,(dtQueryFilter const *)arg3,arg4,arg5,arg6,arg7);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10380,8 +10450,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1findRa
   arg3 = *(float (**)())&jarg3; 
   arg4 = *(dtPolyRef **)&jarg4; 
   arg5 = *(float **)&jarg5; 
-  result = ((dtNavMeshQuery const *)arg1)->findRandomPoint((dtQueryFilter const *)arg2,arg3,arg4,arg5);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findRandomPoint((dtQueryFilter const *)arg2,arg3,arg4,arg5);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10410,8 +10480,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1findRa
   arg6 = *(float (**)())&jarg6; 
   arg7 = *(dtPolyRef **)&jarg7; 
   arg8 = *(float **)&jarg8; 
-  result = ((dtNavMeshQuery const *)arg1)->findRandomPointAroundCircle(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->findRandomPointAroundCircle(arg2,(float const *)arg3,arg4,(dtQueryFilter const *)arg5,arg6,arg7,arg8);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10433,8 +10503,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1closes
   arg3 = *(float **)&jarg3; 
   arg4 = *(float **)&jarg4; 
   arg5 = *(bool **)&jarg5; 
-  result = ((dtNavMeshQuery const *)arg1)->closestPointOnPoly(arg2,(float const *)arg3,arg4,arg5);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->closestPointOnPoly(arg2,(float const *)arg3,arg4,arg5);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10454,8 +10524,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1closes
   arg2 = (dtPolyRef)jarg2; 
   arg3 = *(float **)&jarg3; 
   arg4 = *(float **)&jarg4; 
-  result = ((dtNavMeshQuery const *)arg1)->closestPointOnPolyBoundary(arg2,(float const *)arg3,arg4);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->closestPointOnPolyBoundary(arg2,(float const *)arg3,arg4);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10475,8 +10545,8 @@ SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNavMeshQuery_1getPol
   arg2 = (dtPolyRef)jarg2; 
   arg3 = *(float **)&jarg3; 
   arg4 = *(float **)&jarg4; 
-  result = ((dtNavMeshQuery const *)arg1)->getPolyHeight(arg2,(float const *)arg3,arg4);
-  *(dtStatus **)&jresult = new dtStatus((const dtStatus &)result); 
+  result = (dtStatus)((dtNavMeshQuery const *)arg1)->getPolyHeight(arg2,(float const *)arg3,arg4);
+  jresult = (jlong)result; 
   return jresult;
 }
 
@@ -10568,6 +10638,901 @@ SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_dtFreeNavMeshQuery(JNIE
   (void)jarg1_;
   arg1 = *(dtNavMeshQuery **)&jarg1; 
   dtFreeNavMeshQuery(arg1);
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_DT_1FAILURE_1get(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (unsigned int)(unsigned int)DT_FAILURE;
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_DT_1SUCCESS_1get(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (unsigned int)(unsigned int)DT_SUCCESS;
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_DT_1IN_1PROGRESS_1get(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (unsigned int)(unsigned int)DT_IN_PROGRESS;
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_DT_1STATUS_1DETAIL_1MASK_1get(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (unsigned int)(unsigned int)DT_STATUS_DETAIL_MASK;
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_DT_1WRONG_1MAGIC_1get(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (unsigned int)(unsigned int)DT_WRONG_MAGIC;
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_DT_1WRONG_1VERSION_1get(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (unsigned int)(unsigned int)DT_WRONG_VERSION;
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_DT_1OUT_1OF_1MEMORY_1get(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (unsigned int)(unsigned int)DT_OUT_OF_MEMORY;
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_DT_1INVALID_1PARAM_1get(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (unsigned int)(unsigned int)DT_INVALID_PARAM;
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_DT_1BUFFER_1TOO_1SMALL_1get(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (unsigned int)(unsigned int)DT_BUFFER_TOO_SMALL;
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_DT_1OUT_1OF_1NODES_1get(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (unsigned int)(unsigned int)DT_OUT_OF_NODES;
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_DT_1PARTIAL_1RESULT_1get(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (unsigned int)(unsigned int)DT_PARTIAL_RESULT;
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jboolean JNICALL Java_com_laykun_recast_RecastJNI_dtStatusSucceed(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jboolean jresult = 0 ;
+  dtStatus arg1 ;
+  bool result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (dtStatus)jarg1; 
+  result = (bool)dtStatusSucceed(arg1);
+  jresult = (jboolean)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jboolean JNICALL Java_com_laykun_recast_RecastJNI_dtStatusFailed(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jboolean jresult = 0 ;
+  dtStatus arg1 ;
+  bool result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (dtStatus)jarg1; 
+  result = (bool)dtStatusFailed(arg1);
+  jresult = (jboolean)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jboolean JNICALL Java_com_laykun_recast_RecastJNI_dtStatusInProgress(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jboolean jresult = 0 ;
+  dtStatus arg1 ;
+  bool result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (dtStatus)jarg1; 
+  result = (bool)dtStatusInProgress(arg1);
+  jresult = (jboolean)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jboolean JNICALL Java_com_laykun_recast_RecastJNI_dtStatusDetail(JNIEnv *jenv, jclass jcls, jlong jarg1, jlong jarg2) {
+  jboolean jresult = 0 ;
+  dtStatus arg1 ;
+  unsigned int arg2 ;
+  bool result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (dtStatus)jarg1; 
+  arg2 = (unsigned int)jarg2; 
+  result = (bool)dtStatusDetail(arg1,arg2);
+  jresult = (jboolean)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_DT_1NODE_1OPEN_1get(JNIEnv *jenv, jclass jcls) {
+  jint jresult = 0 ;
+  dtNodeFlags result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (dtNodeFlags)DT_NODE_OPEN;
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_DT_1NODE_1CLOSED_1get(JNIEnv *jenv, jclass jcls) {
+  jint jresult = 0 ;
+  dtNodeFlags result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (dtNodeFlags)DT_NODE_CLOSED;
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_DT_1NODE_1PARENT_1DETACHED_1get(JNIEnv *jenv, jclass jcls) {
+  jint jresult = 0 ;
+  dtNodeFlags result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (dtNodeFlags)DT_NODE_PARENT_DETACHED;
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_DT_1NULL_1IDX_1get(JNIEnv *jenv, jclass jcls) {
+  jint jresult = 0 ;
+  dtNodeIndex result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (dtNodeIndex)(dtNodeIndex)DT_NULL_IDX;
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_dtNode_1pos_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+  dtNode *arg1 = (dtNode *) 0 ;
+  float *arg2 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNode **)&jarg1; 
+  arg2 = *(float **)&jarg2; 
+  {
+    size_t ii;
+    float *b = (float *) arg1->pos;
+    for (ii = 0; ii < (size_t)3; ii++) b[ii] = *((float *) arg2 + ii);
+  }
+  
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNode_1pos_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jlong jresult = 0 ;
+  dtNode *arg1 = (dtNode *) 0 ;
+  float *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNode **)&jarg1; 
+  result = (float *)(float *) ((arg1)->pos);
+  *(float **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_dtNode_1cost_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jfloat jarg2) {
+  dtNode *arg1 = (dtNode *) 0 ;
+  float arg2 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNode **)&jarg1; 
+  arg2 = (float)jarg2; 
+  if (arg1) (arg1)->cost = arg2;
+}
+
+
+SWIGEXPORT jfloat JNICALL Java_com_laykun_recast_RecastJNI_dtNode_1cost_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jfloat jresult = 0 ;
+  dtNode *arg1 = (dtNode *) 0 ;
+  float result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNode **)&jarg1; 
+  result = (float) ((arg1)->cost);
+  jresult = (jfloat)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_dtNode_1total_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jfloat jarg2) {
+  dtNode *arg1 = (dtNode *) 0 ;
+  float arg2 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNode **)&jarg1; 
+  arg2 = (float)jarg2; 
+  if (arg1) (arg1)->total = arg2;
+}
+
+
+SWIGEXPORT jfloat JNICALL Java_com_laykun_recast_RecastJNI_dtNode_1total_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jfloat jresult = 0 ;
+  dtNode *arg1 = (dtNode *) 0 ;
+  float result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNode **)&jarg1; 
+  result = (float) ((arg1)->total);
+  jresult = (jfloat)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_dtNode_1pidx_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+  dtNode *arg1 = (dtNode *) 0 ;
+  unsigned int arg2 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNode **)&jarg1; 
+  arg2 = (unsigned int)jarg2; 
+  if (arg1) (arg1)->pidx = arg2;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNode_1pidx_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jlong jresult = 0 ;
+  dtNode *arg1 = (dtNode *) 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNode **)&jarg1; 
+  result = (unsigned int) ((arg1)->pidx);
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_dtNode_1state_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+  dtNode *arg1 = (dtNode *) 0 ;
+  unsigned int arg2 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNode **)&jarg1; 
+  arg2 = (unsigned int)jarg2; 
+  if (arg1) (arg1)->state = arg2;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNode_1state_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jlong jresult = 0 ;
+  dtNode *arg1 = (dtNode *) 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNode **)&jarg1; 
+  result = (unsigned int) ((arg1)->state);
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_dtNode_1flags_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+  dtNode *arg1 = (dtNode *) 0 ;
+  unsigned int arg2 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNode **)&jarg1; 
+  arg2 = (unsigned int)jarg2; 
+  if (arg1) (arg1)->flags = arg2;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNode_1flags_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jlong jresult = 0 ;
+  dtNode *arg1 = (dtNode *) 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNode **)&jarg1; 
+  result = (unsigned int) ((arg1)->flags);
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_dtNode_1id_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+  dtNode *arg1 = (dtNode *) 0 ;
+  dtPolyRef arg2 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNode **)&jarg1; 
+  arg2 = (dtPolyRef)jarg2; 
+  if (arg1) (arg1)->id = arg2;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNode_1id_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jlong jresult = 0 ;
+  dtNode *arg1 = (dtNode *) 0 ;
+  dtPolyRef result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNode **)&jarg1; 
+  result = (dtPolyRef) ((arg1)->id);
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_new_1dtNode(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  dtNode *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (dtNode *)new dtNode();
+  *(dtNode **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_delete_1dtNode(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  dtNode *arg1 = (dtNode *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(dtNode **)&jarg1; 
+  delete arg1;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_DT_1MAX_1STATES_1PER_1NODE_1get(JNIEnv *jenv, jclass jcls) {
+  jint jresult = 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (int)(int)DT_MAX_STATES_PER_NODE;
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_new_1dtNodePool(JNIEnv *jenv, jclass jcls, jint jarg1, jint jarg2) {
+  jlong jresult = 0 ;
+  int arg1 ;
+  int arg2 ;
+  dtNodePool *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (int)jarg1; 
+  arg2 = (int)jarg2; 
+  result = (dtNodePool *)new dtNodePool(arg1,arg2);
+  *(dtNodePool **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_delete_1dtNodePool(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(dtNodePool **)&jarg1; 
+  delete arg1;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_dtNodePool_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodePool **)&jarg1; 
+  (arg1)->clear();
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNodePool_1getNode_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jshort jarg3) {
+  jlong jresult = 0 ;
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  dtPolyRef arg2 ;
+  unsigned char arg3 ;
+  dtNode *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodePool **)&jarg1; 
+  arg2 = (dtPolyRef)jarg2; 
+  arg3 = (unsigned char)jarg3; 
+  result = (dtNode *)(arg1)->getNode(arg2,arg3);
+  *(dtNode **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNodePool_1getNode_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+  jlong jresult = 0 ;
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  dtPolyRef arg2 ;
+  dtNode *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodePool **)&jarg1; 
+  arg2 = (dtPolyRef)jarg2; 
+  result = (dtNode *)(arg1)->getNode(arg2);
+  *(dtNode **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNodePool_1findNode(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jshort jarg3) {
+  jlong jresult = 0 ;
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  dtPolyRef arg2 ;
+  unsigned char arg3 ;
+  dtNode *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodePool **)&jarg1; 
+  arg2 = (dtPolyRef)jarg2; 
+  arg3 = (unsigned char)jarg3; 
+  result = (dtNode *)(arg1)->findNode(arg2,arg3);
+  *(dtNode **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNodePool_1findNodes(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jint jarg4) {
+  jlong jresult = 0 ;
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  dtPolyRef arg2 ;
+  dtNode **arg3 = (dtNode **) 0 ;
+  int arg4 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodePool **)&jarg1; 
+  arg2 = (dtPolyRef)jarg2; 
+  arg3 = *(dtNode ***)&jarg3; 
+  arg4 = (int)jarg4; 
+  result = (unsigned int)(arg1)->findNodes(arg2,arg3,arg4);
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNodePool_1getNodeIdx(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+  jlong jresult = 0 ;
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  dtNode *arg2 = (dtNode *) 0 ;
+  unsigned int result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  (void)jarg2_;
+  arg1 = *(dtNodePool **)&jarg1; 
+  arg2 = *(dtNode **)&jarg2; 
+  result = (unsigned int)((dtNodePool const *)arg1)->getNodeIdx((dtNode const *)arg2);
+  jresult = (jlong)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNodePool_1getNodeAtIdx_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+  jlong jresult = 0 ;
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  unsigned int arg2 ;
+  dtNode *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodePool **)&jarg1; 
+  arg2 = (unsigned int)jarg2; 
+  result = (dtNode *)(arg1)->getNodeAtIdx(arg2);
+  *(dtNode **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_dtNodePool_1getMemUsed(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jint jresult = 0 ;
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodePool **)&jarg1; 
+  result = (int)((dtNodePool const *)arg1)->getMemUsed();
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_dtNodePool_1getMaxNodes(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jint jresult = 0 ;
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodePool **)&jarg1; 
+  result = (int)((dtNodePool const *)arg1)->getMaxNodes();
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_dtNodePool_1getHashSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jint jresult = 0 ;
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodePool **)&jarg1; 
+  result = (int)((dtNodePool const *)arg1)->getHashSize();
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_dtNodePool_1getFirst(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+  jint jresult = 0 ;
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  int arg2 ;
+  dtNodeIndex result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodePool **)&jarg1; 
+  arg2 = (int)jarg2; 
+  result = (dtNodeIndex)((dtNodePool const *)arg1)->getFirst(arg2);
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_dtNodePool_1getNext(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+  jint jresult = 0 ;
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  int arg2 ;
+  dtNodeIndex result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodePool **)&jarg1; 
+  arg2 = (int)jarg2; 
+  result = (dtNodeIndex)((dtNodePool const *)arg1)->getNext(arg2);
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_dtNodePool_1getNodeCount(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jint jresult = 0 ;
+  dtNodePool *arg1 = (dtNodePool *) 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodePool **)&jarg1; 
+  result = (int)((dtNodePool const *)arg1)->getNodeCount();
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_new_1dtNodeQueue(JNIEnv *jenv, jclass jcls, jint jarg1) {
+  jlong jresult = 0 ;
+  int arg1 ;
+  dtNodeQueue *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (int)jarg1; 
+  result = (dtNodeQueue *)new dtNodeQueue(arg1);
+  *(dtNodeQueue **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_delete_1dtNodeQueue(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(dtNodeQueue **)&jarg1; 
+  delete arg1;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_dtNodeQueue_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodeQueue **)&jarg1; 
+  (arg1)->clear();
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNodeQueue_1top(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jlong jresult = 0 ;
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  dtNode *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodeQueue **)&jarg1; 
+  result = (dtNode *)(arg1)->top();
+  *(dtNode **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtNodeQueue_1pop(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jlong jresult = 0 ;
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  dtNode *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodeQueue **)&jarg1; 
+  result = (dtNode *)(arg1)->pop();
+  *(dtNode **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_dtNodeQueue_1push(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  dtNode *arg2 = (dtNode *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  (void)jarg2_;
+  arg1 = *(dtNodeQueue **)&jarg1; 
+  arg2 = *(dtNode **)&jarg2; 
+  (arg1)->push(arg2);
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_dtNodeQueue_1modify(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  dtNode *arg2 = (dtNode *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  (void)jarg2_;
+  arg1 = *(dtNodeQueue **)&jarg1; 
+  arg2 = *(dtNode **)&jarg2; 
+  (arg1)->modify(arg2);
+}
+
+
+SWIGEXPORT jboolean JNICALL Java_com_laykun_recast_RecastJNI_dtNodeQueue_1empty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jboolean jresult = 0 ;
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  bool result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodeQueue **)&jarg1; 
+  result = (bool)((dtNodeQueue const *)arg1)->empty();
+  jresult = (jboolean)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_dtNodeQueue_1getMemUsed(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jint jresult = 0 ;
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodeQueue **)&jarg1; 
+  result = (int)((dtNodeQueue const *)arg1)->getMemUsed();
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_laykun_recast_RecastJNI_dtNodeQueue_1getCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jint jresult = 0 ;
+  dtNodeQueue *arg1 = (dtNodeQueue *) 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(dtNodeQueue **)&jarg1; 
+  result = (int)((dtNodeQueue const *)arg1)->getCapacity();
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_dtAllocSetCustom(JNIEnv *jenv, jclass jcls, jlong jarg1, jlong jarg2) {
+  dtAllocFunc *arg1 = (dtAllocFunc *) 0 ;
+  dtFreeFunc *arg2 = (dtFreeFunc *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(dtAllocFunc **)&jarg1; 
+  arg2 = *(dtFreeFunc **)&jarg2; 
+  dtAllocSetCustom(arg1,arg2);
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_laykun_recast_RecastJNI_dtAlloc(JNIEnv *jenv, jclass jcls, jint jarg1, jint jarg2) {
+  jlong jresult = 0 ;
+  int arg1 ;
+  dtAllocHint arg2 ;
+  void *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (int)jarg1; 
+  arg2 = (dtAllocHint)jarg2; 
+  result = (void *)dtAlloc(arg1,arg2);
+  *(void **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_laykun_recast_RecastJNI_dtFree(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  void *arg1 = (void *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = 0;
+  if (jarg1) {
+    arg1 = (void *)jenv->GetStringUTFChars(jarg1, 0);
+    if (!arg1) return ;
+  }
+  dtFree(arg1);
 }
 
 
